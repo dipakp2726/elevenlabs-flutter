@@ -9,6 +9,7 @@ Map<String, dynamic> constructOverrides(ConversationConfig config) {
     if (overrides?.conversation != null)
       'conversation': overrides!.conversation!.toJson(),
     if (overrides?.tts != null) 'tts': overrides!.tts!.toJson(),
+    if (overrides?.asr != null) 'asr': overrides!.asr!.toJson(),
   };
 
   final overridesEvent = <String, dynamic>{

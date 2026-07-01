@@ -53,7 +53,16 @@ class ConversationOverrides {
   /// Client configuration overrides
   final ClientOverrides? client;
 
-  ConversationOverrides({this.agent, this.tts, this.conversation, this.client});
+  /// Automatic-speech-recognition overrides
+  final AsrOverrides? asr;
+
+  ConversationOverrides({
+    this.agent,
+    this.tts,
+    this.conversation,
+    this.client,
+    this.asr,
+  });
 
   Map<String, dynamic> toJson() {
     return {
@@ -61,6 +70,21 @@ class ConversationOverrides {
       if (tts != null) 'tts': tts!.toJson(),
       if (conversation != null) 'conversation': conversation!.toJson(),
       if (client != null) 'client': client!.toJson(),
+      if (asr != null) 'asr': asr!.toJson(),
+    };
+  }
+}
+
+/// Automatic-speech-recognition configuration overrides
+class AsrOverrides {
+  /// Keyword-biasing terms for transcription
+  final List<String>? keywords;
+
+  AsrOverrides({this.keywords});
+
+  Map<String, dynamic> toJson() {
+    return {
+      if (keywords != null) 'keywords': keywords,
     };
   }
 }
