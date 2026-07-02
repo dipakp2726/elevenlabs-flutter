@@ -121,8 +121,16 @@ class AgentOverrides {
   Map<String, dynamic> toJson() {
     return {
       if (firstMessage != null) 'first_message': firstMessage,
-      if (prompt != null) 'prompt': prompt,
-      if (llm != null) 'llm': llm,
+      // The server schema (ConversationConfigOverrideAgentPrompt) expects a
+      // nested object: agent.prompt = {prompt: ..., llm: ...}. Emitting a
+      // flat string fails conversation-initiation validation over WebRTC
+      // ("1 validation error for ConversationInitiationClientToOrchestratorEvent")
+      // and the platform terminates the session ~1s after connect.
+      if (prompt != null || llm != null)
+        'prompt': {
+          if (prompt != null) 'prompt': prompt,
+          if (llm != null) 'llm': llm,
+        },
       if (temperature != null) 'temperature': temperature,
       if (maxTokens != null) 'max_tokens': maxTokens,
       if (language != null) 'language': language,

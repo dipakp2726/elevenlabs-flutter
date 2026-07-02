@@ -494,8 +494,9 @@ void main() {
 
       final json = overrides.toJson();
       expect(json['agent']['first_message'], 'Welcome!');
-      expect(json['agent']['prompt'], 'Be helpful');
-      expect(json['agent']['llm'], 'gpt-4');
+      // prompt + llm serialize as the nested object the server schema
+      // (ConversationConfigOverrideAgentPrompt) expects.
+      expect(json['agent']['prompt'], {'prompt': 'Be helpful', 'llm': 'gpt-4'});
       expect(json['agent']['temperature'], 0.8);
       expect(json['agent']['max_tokens'], 1000);
       expect(json['agent']['language'], 'en');

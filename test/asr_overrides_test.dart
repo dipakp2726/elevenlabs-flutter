@@ -76,7 +76,7 @@ void main() {
       expect(cco.containsKey('asr'), isFalse);
       expect(cco.containsKey('agent'), isTrue);
       expect(cco.containsKey('tts'), isTrue);
-      expect((cco['agent'] as Map)['prompt'], 'hi');
+      expect((cco['agent'] as Map)['prompt'], {'prompt': 'hi'});
       expect((cco['agent'] as Map)['first_message'], 'hello');
     });
 
